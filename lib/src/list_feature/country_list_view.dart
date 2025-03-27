@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kosmos/src/list_feature/country_item_view.dart';
 
 import 'country_item.dart';
 import 'country_details_view.dart';
@@ -8,56 +9,118 @@ class CountryListView extends StatelessWidget {
   const CountryListView({
     super.key,
     this.items = const [
-      SampleItem(1),
-      SampleItem(2),
-      SampleItem(3),
-      SampleItem(4)
+      CountryItem(
+          name: "France",
+          capital: "Paris",
+          code: "FRA",
+          imageAlt: "",
+          imageUrl: "https://flagcdn.com/w320/gd.png"),
+      CountryItem(
+          name: "France",
+          capital: "Paris",
+          code: "FRA",
+          imageAlt: "",
+          imageUrl: "https://flagcdn.com/w320/gd.png"),
+      CountryItem(
+          name: "France",
+          capital: "Paris",
+          code: "FRA",
+          imageAlt: "",
+          imageUrl: "https://flagcdn.com/w320/gd.png"),
+      CountryItem(
+          name: "France",
+          capital: "Paris",
+          code: "FRA",
+          imageAlt: "",
+          imageUrl: "https://flagcdn.com/w320/gd.png"),
+      CountryItem(
+          name: "France",
+          capital: "Paris",
+          code: "FRA",
+          imageAlt: "",
+          imageUrl: "https://flagcdn.com/w320/gd.png"),
+      CountryItem(
+          name: "France",
+          capital: "Paris",
+          code: "FRA",
+          imageAlt: "",
+          imageUrl: "https://flagcdn.com/w320/gd.png"),
+      CountryItem(
+          name: "France",
+          capital: "Paris",
+          code: "FRA",
+          imageAlt: "",
+          imageUrl: "https://flagcdn.com/w320/gd.png"),
+      CountryItem(
+          name: "France",
+          capital: "Paris",
+          code: "FRA",
+          imageAlt: "",
+          imageUrl: "https://flagcdn.com/w320/gd.png"),
+      CountryItem(
+          name: "France",
+          capital: "Paris",
+          code: "FRA",
+          imageAlt: "",
+          imageUrl: "https://flagcdn.com/w320/gd.png"),
+      CountryItem(
+          name: "France",
+          capital: "Paris",
+          code: "FRA",
+          imageAlt: "",
+          imageUrl: "https://flagcdn.com/w320/gd.png"),
+      CountryItem(
+          name: "France",
+          capital: "Paris",
+          code: "FRA",
+          imageAlt: "",
+          imageUrl: "https://flagcdn.com/w320/gd.png"),
+      CountryItem(
+          name: "France",
+          capital: "Paris",
+          code: "FRA",
+          imageAlt: "",
+          imageUrl: "https://flagcdn.com/w320/gd.png"),
+      CountryItem(
+          name: "France",
+          capital: "Paris",
+          code: "FRA",
+          imageAlt: "",
+          imageUrl: "https://flagcdn.com/w320/gd.png"),
+      CountryItem(
+          name: "France",
+          capital: "Paris",
+          code: "FRA",
+          imageAlt: "",
+          imageUrl: "https://flagcdn.com/w320/gd.png"),
     ],
   });
 
   static const routeName = '/';
 
-  final List<SampleItem> items;
+  final List<CountryItem> items;
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Sample Items'),
-      ),
+    return ListView.builder(
+      // Providing a restorationId allows the ListView to restore the
+      // scroll position when a user leaves and returns to the app after it
+      // has been killed while running in the background.
+      shrinkWrap: true, // Makes the ListView take only the needed space
+      physics: NeverScrollableScrollPhysics(),
+      restorationId: 'sampleItemListView',
+      itemCount: items.length,
 
-      // To work with lists that may contain a large number of items, it’s best
-      // to use the ListView.builder constructor.
-      //
-      // In contrast to the default ListView constructor, which requires
-      // building all Widgets up front, the ListView.builder constructor lazily
-      // builds Widgets as they’re scrolled into view.
-      body: ListView.builder(
-        // Providing a restorationId allows the ListView to restore the
-        // scroll position when a user leaves and returns to the app after it
-        // has been killed while running in the background.
-        restorationId: 'sampleItemListView',
-        itemCount: items.length,
-        itemBuilder: (BuildContext context, int index) {
-          final item = items[index];
+      itemBuilder: (BuildContext context, int index) {
+        final item = items[index];
 
-          return ListTile(
-              title: Text('SampleItem ${item.id}'),
-              leading: const CircleAvatar(
-                // Display the Flutter Logo image asset.
-                foregroundImage: AssetImage('assets/images/flutter_logo.png'),
-              ),
-              onTap: () {
-                // Navigate to the details page. If the user leaves and returns to
-                // the app after it has been killed while running in the
-                // background, the navigation stack is restored.
-                Navigator.restorablePushNamed(
-                  context,
-                  CountryDetailsView.routeName,
-                );
-              });
-        },
-      ),
+        return SizedBox(
+          height: 150,
+          child: CountryItemView(
+            item: item,
+          ),
+        );
+      },
     );
   }
 }

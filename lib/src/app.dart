@@ -73,7 +73,7 @@ class MyApp extends StatelessWidget {
             switch (routeSettings.name) {
               case CountryDetailsView.routeName:
                 return const CountryDetailsView();
-              case CountryListView.routeName:
+              // case CountryListView.routeName:
               default:
                 return const HomeView();
             }
