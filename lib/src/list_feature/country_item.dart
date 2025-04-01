@@ -1,4 +1,3 @@
-/// A placeholder class that represents an entity or model.
 class CountryItem {
   const CountryItem(
       {required this.code,

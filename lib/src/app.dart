@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:kosmos/src/home_feature/home_view.dart';
-
-import 'list_feature/country_details_view.dart';
-import 'list_feature/country_list_view.dart';
+import 'package:kosmos/src/router.dart';
 
 /// The Widget that configures your application.
 class MyApp extends StatelessWidget {
@@ -18,7 +15,7 @@ class MyApp extends StatelessWidget {
     //
     // The ListenableBuilder Widget listens to the SettingsController for changes.
     // Whenever the user updates their settings, the MaterialApp is rebuilt.
-    return MaterialApp(
+    return MaterialApp.router(
       // Providing a restorationScopeId allows the Navigator built by the
       // MaterialApp to restore the navigation stack when a user leaves and
       // returns to the app after it has been killed while running in the
@@ -61,25 +58,27 @@ class MyApp extends StatelessWidget {
           headlineSmall: TextStyle(
               fontSize: 22, fontWeight: FontWeight.w600, color: Colors.black),
           bodyMedium: TextStyle(fontSize: 16, color: Colors.grey[800]),
+          bodyLarge: TextStyle(
+              fontSize: 16, fontWeight: FontWeight.w600, color: Colors.black),
         ),
       ),
 
-      // Define a function to handle named routes in order to support
-      // Flutter web url navigation and deep linking.
-      onGenerateRoute: (RouteSettings routeSettings) {
-        return MaterialPageRoute<void>(
-          settings: routeSettings,
-          builder: (BuildContext context) {
-            switch (routeSettings.name) {
-              case CountryDetailsView.routeName:
-                return const CountryDetailsView();
-              // case CountryListView.routeName:
-              default:
-                return const HomeView();
-            }
-          },
-        );
-      },
+      routerConfig: appRouter,
+
+      // onGenerateRoute: (RouteSettings routeSettings) {
+      //   return MaterialPageRoute<void>(
+      //     settings: routeSettings,
+      //     builder: (BuildContext context) {
+      //       switch (routeSettings.name) {
+      //         case CountryDetailsView.routeName:
+      //           return const CountryDetailsView();
+      //         // case CountryListView.routeName:
+      //         default:
+      //           return const HomeView();
+      //       }
+      //     },
+      //   );
+      // },
     );
   }
 }
