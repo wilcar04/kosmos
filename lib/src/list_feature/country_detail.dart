@@ -12,7 +12,6 @@ class CountryDetail {
     required this.population,
     required this.area,
     required this.coatOfArmsUrl,
-    required this.mapsUrl,
   });
 
   final String code;
@@ -26,9 +25,8 @@ class CountryDetail {
   final String subRegion;
   final String flagEmoji;
   final int population;
-  final int area;
+  final double area;
   final String coatOfArmsUrl;
-  final String mapsUrl;
 
   factory CountryDetail.fromJson(Map<String, dynamic> json) {
     return CountryDetail(
@@ -37,14 +35,13 @@ class CountryDetail {
       capital: (json['capital'] as List<dynamic>?)?.first ?? 'Unknown',
       imageUrl: json['flags']['png'] ?? '',
       imageAlt: json['flags']['alt'] ?? '',
-      currency: json['currencies']?.entries.first.value['name'] ?? 'Unknown',
+      currency: json['currencies']?.keys.first ?? 'Unknown',
       region: json['region'] ?? '',
       subRegion: json['subregion'] ?? '',
       flagEmoji: json['flag'] ?? '',
       population: json['population'] ?? 0,
       area: json['area'] ?? 0,
       coatOfArmsUrl: json['coatOfArms']['png'] ?? '',
-      mapsUrl: json['maps']['googleMaps'] ?? '',
     );
   }
 }

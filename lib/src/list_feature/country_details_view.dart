@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:kosmos/src/list_feature/country_detail.dart';
 import 'package:kosmos/src/list_feature/widgets/info_cell_country.dart';
+import 'package:kosmos/src/services/country_service.dart';
 
 /// Displays detailed information about a SampleItem.
 class CountryDetailsView extends StatefulWidget {
@@ -14,35 +15,65 @@ class CountryDetailsView extends StatefulWidget {
 }
 
 class _CountryDetailsViewState extends State<CountryDetailsView> {
+  final countryService = CountryService();
+
   CountryDetail? country;
+  bool _isLoading = false;
 
   @override
   void initState() {
     super.initState();
-    Map<String, dynamic> franceJson = {
-      "cca3": "FRA",
-      "name": {"common": "France"},
-      "capital": ["Paris"],
-      "flags": {
-        "png": "https://flagcdn.com/w320/fr.png",
-        "alt": "The flag of France..."
-      },
-      "currencies": {
-        "EUR": {"name": "Euro"}
-      },
-      "region": "Europe",
-      "subregion": "Western Europe",
-      "flag": "🇫🇷",
-      "population": 67391582,
-      "area": 551695,
-      "coatOfArms": {
-        "png": "https://mainfacts.com/media/images/coats_of_arms/fr.png"
-      },
-      "maps": {"googleMaps": "https://goo.gl/maps/g7QxxSFsWyTPKuzd7"}
-    };
+    // Map<String, dynamic> franceJson = {
+    //   "cca3": "FRA",
+    //   "name": {"common": "France"},
+    //   "capital": ["Paris"],
+    //   "flags": {
+    //     "png": "https://flagcdn.com/w320/fr.png",
+    //     "alt": "The flag of France..."
+    //   },
+    //   "currencies": {
+    //     "EUR": {"name": "Euro"}
+    //   },
+    //   "region": "Europe",
+    //   "subregion": "Western Europe",
+    //   "flag": "🇫🇷",
+    //   "population": 67391582,
+    //   "area": 551695,
+    //   "coatOfArms": {
+    //     "png": "https://mainfacts.com/media/images/coats_of_arms/fr.png"
+    //   },
+    //   "maps": {"googleMaps": "https://goo.gl/maps/g7QxxSFsWyTPKuzd7"}
+    // };
 
-    // Creating an instance of Country from JSON
-    country = CountryDetail.fromJson(franceJson);
+    // // Creating an instance of Country from JSON
+    // country = CountryDetail.fromJson(franceJson);
+    _fetchCountryDetail(widget.name);
+  }
+
+  Future<void> _fetchCountryDetail(String name) async {
+    setState(() {
+      _isLoading = true;
+    });
+    try {
+      final list = await countryService.fetchCountryDetail(name);
+      if (mounted) {
+        setState(() {
+          country = list[0];
+          _isLoading = false;
+        });
+      }
+    } catch (error) {
+      setState(() {
+        _isLoading = false;
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              error.toString(),
+            ),
+          ),
+        );
+      });
+    }
   }
 
   @override
