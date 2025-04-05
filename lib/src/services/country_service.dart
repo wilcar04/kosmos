@@ -32,4 +32,27 @@ class CountryService {
       throw Exception('Not found');
     }
   }
+
+  Future<String> fetchCountryPhoto(String name) async {
+    final url = Uri.https('www.pixabay.com', "/api/", {
+      'key': '49497773-9334095235e71db736f28b2e3',
+      'q': name,
+      'orientation': 'horizontal',
+      'per_page': '4'
+    });
+
+    final headers = {
+      'key': '49497773-9334095235e71db736f28b2e3',
+    };
+
+    final response = await http.get(url, headers: headers);
+
+    if (response.statusCode == 200) {
+      final List<dynamic> listOfJson = jsonDecode(response.body)['hits'];
+      // return [''];
+      return listOfJson[0]['webformatURL'] as String;
+    } else {
+      throw Exception('Not found');
+    }
+  }
 }

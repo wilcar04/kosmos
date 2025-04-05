@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:kosmos/src/components/loader.dart';
 import 'package:kosmos/src/list_feature/country_detail.dart';
 import 'package:kosmos/src/list_feature/widgets/info_cell_country.dart';
 import 'package:kosmos/src/services/country_service.dart';
@@ -18,36 +19,36 @@ class _CountryDetailsViewState extends State<CountryDetailsView> {
   final countryService = CountryService();
 
   CountryDetail? country;
+  String countryPhoto =
+      'https://media.architecturaldigest.com/photos/66a951edce728792a48166e6/3:2/w_7950,h_5300,c_limit/GettyImages-955441104.jpg';
   bool _isLoading = false;
 
   @override
   void initState() {
     super.initState();
-    // Map<String, dynamic> franceJson = {
-    //   "cca3": "FRA",
-    //   "name": {"common": "France"},
-    //   "capital": ["Paris"],
-    //   "flags": {
-    //     "png": "https://flagcdn.com/w320/fr.png",
-    //     "alt": "The flag of France..."
-    //   },
-    //   "currencies": {
-    //     "EUR": {"name": "Euro"}
-    //   },
-    //   "region": "Europe",
-    //   "subregion": "Western Europe",
-    //   "flag": "🇫🇷",
-    //   "population": 67391582,
-    //   "area": 551695,
-    //   "coatOfArms": {
-    //     "png": "https://mainfacts.com/media/images/coats_of_arms/fr.png"
-    //   },
-    //   "maps": {"googleMaps": "https://goo.gl/maps/g7QxxSFsWyTPKuzd7"}
-    // };
-
-    // // Creating an instance of Country from JSON
-    // country = CountryDetail.fromJson(franceJson);
     _fetchCountryDetail(widget.name);
+    _fetchCountryPhoto(widget.name);
+  }
+
+  Future<void> _fetchCountryPhoto(String name) async {
+    try {
+      final photoUrl = await countryService.fetchCountryPhoto(name);
+      if (mounted) {
+        setState(() {
+          countryPhoto = photoUrl;
+        });
+      }
+    } catch (error) {
+      setState(() {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              error.toString(),
+            ),
+          ),
+        );
+      });
+    }
   }
 
   Future<void> _fetchCountryDetail(String name) async {
@@ -95,147 +96,164 @@ class _CountryDetailsViewState extends State<CountryDetailsView> {
             ),
           ),
         ),
-        body: country != null
-            ? SingleChildScrollView(
-                child: Column(
-                  children: [
-                    Stack(
-                      clipBehavior: Clip.none,
+        body: _isLoading
+            ? Loader()
+            : country != null
+                ? SingleChildScrollView(
+                    child: Column(
                       children: [
-                        SizedBox(
-                          height: 186,
-                          width: double.infinity,
-                          child: Image.network(
-                            'https://media.architecturaldigest.com/photos/66a951edce728792a48166e6/3:2/w_7950,h_5300,c_limit/GettyImages-955441104.jpg',
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                        Positioned(
-                          bottom: -48,
-                          left: 0,
-                          right: 0,
-                          child: Padding(
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 16.0),
-                            child: Column(
-                              children: [
-                                Row(
-                                  mainAxisSize: MainAxisSize.min,
-                                  crossAxisAlignment: CrossAxisAlignment.end,
-                                  spacing: 8,
+                        Stack(
+                          clipBehavior: Clip.none,
+                          children: [
+                            SizedBox(
+                              height: 240,
+                              width: double.infinity,
+                              child: Image.network(
+                                countryPhoto,
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                            Positioned(
+                              bottom: -48,
+                              left: 0,
+                              right: 0,
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 16.0),
+                                child: Column(
                                   children: [
-                                    SizedBox(
-                                      height: 82,
-                                      width: null,
-                                      child: ClipRRect(
-                                        borderRadius: BorderRadius.circular(12),
-                                        child: Image.network(
-                                          country!.imageUrl,
-                                          fit: BoxFit.cover,
+                                    Row(
+                                      mainAxisSize: MainAxisSize.min,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.end,
+                                      spacing: 8,
+                                      children: [
+                                        SizedBox(
+                                          height: 82,
+                                          width: null,
+                                          child: ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(12),
+                                            child: Image.network(
+                                              country!.imageUrl,
+                                              fit: BoxFit.cover,
+                                            ),
+                                          ),
                                         ),
-                                      ),
-                                    ),
-                                    Expanded(
-                                      child: Text(
-                                        maxLines: 1,
-                                        overflow: TextOverflow.ellipsis,
-                                        country!.name,
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .headlineLarge,
-                                      ),
+                                        Expanded(
+                                          child: Text(
+                                            maxLines: 1,
+                                            overflow: TextOverflow.ellipsis,
+                                            country!.name,
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .headlineLarge,
+                                          ),
+                                        ),
+                                      ],
                                     ),
                                   ],
                                 ),
-                              ],
+                              ),
                             ),
+                          ],
+                        ),
+                        Padding(
+                          padding:
+                              EdgeInsets.only(top: 72.0, left: 16, right: 16),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                country!.officialName,
+                                style:
+                                    Theme.of(context).textTheme.headlineSmall,
+                              ),
+                              Text(
+                                "${country!.region}, ${country!.subRegion}",
+                                style: Theme.of(context).textTheme.bodyMedium,
+                              ),
+                              // RichText(
+                              //   text: TextSpan(
+                              //     children: [
+                              //       TextSpan(
+                              //         text: "${country!.region}, ",
+                              //         style:
+                              //             Theme.of(context).textTheme.headlineSmall,
+                              //       ),
+                              //       TextSpan(
+                              //         text: country!.subRegion,
+                              //         style: Theme.of(context).textTheme.bodyMedium,
+                              //       ),
+                              //     ],
+                              //   ),
+                              // ),
+                              SizedBox(
+                                height: null,
+                                child: GridView.count(
+                                  shrinkWrap: true,
+                                  physics: NeverScrollableScrollPhysics(),
+                                  primary: false,
+                                  crossAxisCount: 2,
+                                  crossAxisSpacing: 2,
+                                  mainAxisSpacing: 8,
+                                  childAspectRatio: 2,
+                                  padding: EdgeInsets.symmetric(vertical: 16.0),
+                                  children: [
+                                    InfoCellCountry(
+                                      icon: Icons.star,
+                                      title: 'Capital',
+                                      data: country!.capital,
+                                    ),
+                                    InfoCellCountry(
+                                      icon: Icons.attach_money,
+                                      title: 'Currency',
+                                      data: country!.currency,
+                                    ),
+                                    InfoCellCountry(
+                                      icon: Icons.people,
+                                      title: 'Population',
+                                      data: country!.population.toString(),
+                                    ),
+                                    InfoCellCountry(
+                                      icon: Icons.square_foot,
+                                      title: 'Area',
+                                      data: country!.area.toString(),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Column(
+                                    spacing: 8,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        "${country!.flagEmoji}  ${country!.code}",
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .headlineSmall,
+                                      ),
+                                      SizedBox(
+                                          height: 200,
+                                          child: Image.network(
+                                              country!.coatOfArmsUrl,
+                                              fit: BoxFit.cover)),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                              SizedBox(
+                                height: 50,
+                              )
+                            ],
                           ),
                         ),
                       ],
                     ),
-                    Padding(
-                      padding: EdgeInsets.only(top: 72.0, left: 16, right: 16),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          RichText(
-                            text: TextSpan(
-                              children: [
-                                TextSpan(
-                                  text: "${country!.region}, ",
-                                  style:
-                                      Theme.of(context).textTheme.headlineSmall,
-                                ),
-                                TextSpan(
-                                  text: country!.subRegion,
-                                  style: Theme.of(context).textTheme.bodyMedium,
-                                ),
-                              ],
-                            ),
-                          ),
-                          SizedBox(
-                            height: null,
-                            child: GridView.count(
-                              shrinkWrap: true,
-                              physics: NeverScrollableScrollPhysics(),
-                              primary: false,
-                              crossAxisCount: 2,
-                              crossAxisSpacing: 2,
-                              mainAxisSpacing: 8,
-                              childAspectRatio: 2,
-                              padding: EdgeInsets.symmetric(vertical: 16.0),
-                              children: [
-                                InfoCellCountry(
-                                  icon: Icons.star,
-                                  title: 'Capital',
-                                  data: country!.capital,
-                                ),
-                                InfoCellCountry(
-                                  icon: Icons.attach_money,
-                                  title: 'Currency',
-                                  data: country!.currency,
-                                ),
-                                InfoCellCountry(
-                                  icon: Icons.people,
-                                  title: 'Population',
-                                  data: country!.population.toString(),
-                                ),
-                                InfoCellCountry(
-                                  icon: Icons.square_foot,
-                                  title: 'Area',
-                                  data: country!.area.toString(),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Column(
-                                spacing: 8,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    "${country!.flagEmoji}  ${country!.code}",
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .headlineSmall,
-                                  ),
-                                  SizedBox(
-                                      height: 200,
-                                      child: Image.network(
-                                          country!.coatOfArmsUrl,
-                                          fit: BoxFit.cover)),
-                                ],
-                              ),
-                            ],
-                          )
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              )
-            : Center(child: Text('Not found')));
+                  )
+                : Center(child: Text('Not found')));
   }
 }
