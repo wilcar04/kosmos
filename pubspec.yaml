@@ -32,6 +32,12 @@ flutter:
   assets:
     # Add assets from the images directory to the application.
     - assets/images/world.png
+    - assets/images/europe.png
+    - assets/images/asia.png
+    - assets/images/north_america.png
+    - assets/images/south_america.png
+    - assets/images/australia.png
+    - assets/images/africa.png
 
   fonts:
     - family: SofiaPro

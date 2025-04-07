@@ -38,9 +38,31 @@ class ContinentsView extends StatelessWidget {
                 child: GridView.count(
                   shrinkWrap: true,
                   crossAxisCount: 2,
+                  crossAxisSpacing: 8,
+                  mainAxisSpacing: 18,
                   children: [
                     ContinentCard(
-                        imageAsset: '', name: 'Europe', route: 'europe')
+                        imageAsset: 'europe.png',
+                        name: 'Europe',
+                        route: 'europe'),
+                    ContinentCard(
+                        imageAsset: 'asia.png', name: 'Asia', route: 'asia'),
+                    ContinentCard(
+                        imageAsset: 'africa.png',
+                        name: 'Africa',
+                        route: 'africa'),
+                    ContinentCard(
+                        imageAsset: 'north_america.png',
+                        name: 'North America',
+                        route: 'north-america'),
+                    ContinentCard(
+                        imageAsset: 'south_america.png',
+                        name: 'South America',
+                        route: 'south-america'),
+                    ContinentCard(
+                        imageAsset: 'australia.png',
+                        name: 'Australia',
+                        route: 'australia'),
                   ],
                 ),
               )

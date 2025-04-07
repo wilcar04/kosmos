@@ -32,12 +32,12 @@ class ContinentCard extends StatelessWidget {
                     Theme.of(context).primaryColor,
                     Theme.of(context).shadowColor
                   ],
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
                 ).createShader(bounds),
                 blendMode: BlendMode.srcIn,
                 child: Image.asset(
-                  'assets/images/world.png',
+                  'assets/images/$imageAsset',
                   fit: BoxFit.contain,
                 ),
               ),
