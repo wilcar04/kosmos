@@ -41,18 +41,39 @@ class HomeView extends StatelessWidget {
                       borderRadius: BorderRadius.circular(12),
                       child: Container(
                         padding:
-                            EdgeInsets.symmetric(horizontal: 20, vertical: 30),
+                            EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                         height: 120,
                         color: Theme.of(context).primaryColor,
                         child: Row(
                           children: [
-                            SizedBox(
-                              width: 50,
-                              height: 50,
+                            Container(
+                              width: 70,
+                              height: 70,
+                              padding: EdgeInsets.all(4),
+                              decoration: BoxDecoration(
+                                  shape: BoxShape.circle, color: Colors.white),
                               child: Image.asset(
-                                'images/world.png',
+                                'assets/images/world.png',
                                 fit: BoxFit.cover,
                               ),
+                            ),
+                            SizedBox(
+                              width: 20,
+                            ),
+                            Expanded(
+                                child: Text(
+                              'Try searching countries by any continent!',
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w600),
+                            )),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Icon(
+                              Icons.chevron_right,
+                              color: Colors.white,
+                              size: 32.0,
                             )
                           ],
                         ),
