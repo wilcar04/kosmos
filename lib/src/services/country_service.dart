@@ -26,7 +26,8 @@ class CountryService {
     final response = await http.get(url);
 
     if (response.statusCode == 200) {
-      final List<dynamic> listOfJson = jsonDecode(response.body) as List;
+      final decoded = utf8.decode(response.bodyBytes);
+      final List<dynamic> listOfJson = jsonDecode(decoded) as List;
       return listOfJson.map((json) => CountryItem.fromJson(json)).toList();
     } else {
       throw Exception('Not found');
@@ -40,7 +41,8 @@ class CountryService {
     final response = await http.get(url);
 
     if (response.statusCode == 200) {
-      final List<dynamic> listOfJson = jsonDecode(response.body) as List;
+      final decoded = utf8.decode(response.bodyBytes);
+      final List<dynamic> listOfJson = jsonDecode(decoded) as List;
       return listOfJson.map((json) => CountryDetail.fromJson(json)).toList();
     } else {
       throw Exception('Not found');
@@ -63,7 +65,8 @@ class CountryService {
     final response = await http.get(url, headers: headers);
 
     if (response.statusCode == 200) {
-      final List<dynamic> listOfJson = jsonDecode(response.body)['hits'];
+      final decoded = utf8.decode(response.bodyBytes);
+      final List<dynamic> listOfJson = jsonDecode(decoded)['hits'];
       // return [''];
       return listOfJson[0]['webformatURL'] as String;
     } else {

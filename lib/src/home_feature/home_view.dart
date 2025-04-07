@@ -21,7 +21,7 @@ class HomeView extends StatelessWidget {
                 color: Theme.of(context).primaryColor,
               ),
               Text(
-                'Welcome to',
+                'Welcome to Kosmos',
                 style: Theme.of(context).textTheme.headlineSmall,
               ),
             ],

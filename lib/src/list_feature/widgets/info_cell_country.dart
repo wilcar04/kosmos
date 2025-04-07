@@ -6,11 +6,13 @@ class InfoCellCountry extends StatelessWidget {
     required this.data,
     required this.title,
     required this.icon,
+    required this.dominantColor,
   });
 
   final IconData icon;
   final String title;
   final String data;
+  final Color dominantColor;
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +30,7 @@ class InfoCellCountry extends StatelessWidget {
                 borderRadius: BorderRadius.circular(12)),
             child: Icon(
               icon,
-              color: Theme.of(context).primaryColor,
+              color: dominantColor,
               size: 32,
             ),
           ),

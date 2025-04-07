@@ -55,6 +55,7 @@ class ContinentFilterView extends StatelessWidget {
                 ),
                 Text(
                   'Showing results for ${continents[continent]['name']}.',
+                  textAlign: TextAlign.center,
                   style: Theme.of(context).textTheme.headlineSmall,
                 ),
                 SizedBox(
