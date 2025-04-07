@@ -51,6 +51,7 @@ class MyApp extends StatelessWidget {
         fontFamily: 'SofiaPro',
 
         primaryColor: Color(0xFF653CF6),
+        shadowColor: Color(0xFF8831F4),
 
         // Personalizar texto
         textTheme: TextTheme(

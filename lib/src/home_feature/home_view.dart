@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:kosmos/src/list_feature/country_list_view.dart';
 
 class HomeView extends StatelessWidget {
@@ -39,43 +40,49 @@ class HomeView extends StatelessWidget {
                     ),
                     ClipRRect(
                       borderRadius: BorderRadius.circular(12),
-                      child: Container(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                        height: 120,
-                        color: Theme.of(context).primaryColor,
-                        child: Row(
-                          children: [
-                            Container(
-                              width: 70,
-                              height: 70,
-                              padding: EdgeInsets.all(4),
-                              decoration: BoxDecoration(
-                                  shape: BoxShape.circle, color: Colors.white),
-                              child: Image.asset(
-                                'assets/images/world.png',
-                                fit: BoxFit.cover,
+                      child: GestureDetector(
+                        onTap: () {
+                          context.go('/continents');
+                        },
+                        child: Container(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 20, vertical: 10),
+                          height: 120,
+                          color: Theme.of(context).primaryColor,
+                          child: Row(
+                            children: [
+                              Container(
+                                width: 70,
+                                height: 70,
+                                padding: EdgeInsets.all(4),
+                                decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: Colors.white),
+                                child: Image.asset(
+                                  'assets/images/world.png',
+                                  fit: BoxFit.cover,
+                                ),
                               ),
-                            ),
-                            SizedBox(
-                              width: 20,
-                            ),
-                            Expanded(
-                                child: Text(
-                              'Try searching countries by any continent!',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w600),
-                            )),
-                            SizedBox(
-                              width: 10,
-                            ),
-                            Icon(
-                              Icons.chevron_right,
-                              color: Colors.white,
-                              size: 32.0,
-                            )
-                          ],
+                              SizedBox(
+                                width: 20,
+                              ),
+                              Expanded(
+                                  child: Text(
+                                'Try searching countries by any continent!',
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w600),
+                              )),
+                              SizedBox(
+                                width: 10,
+                              ),
+                              Icon(
+                                Icons.chevron_right,
+                                color: Colors.white,
+                                size: 32.0,
+                              )
+                            ],
+                          ),
                         ),
                       ),
                     ),
