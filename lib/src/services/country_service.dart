@@ -38,7 +38,8 @@ class CountryService {
       'key': '49497773-9334095235e71db736f28b2e3',
       'q': name,
       'orientation': 'horizontal',
-      'per_page': '4'
+      'per_page': '4',
+      'image_type': 'photo'
     });
 
     final headers = {

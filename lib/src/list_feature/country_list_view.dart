@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kosmos/src/components/loader.dart';
 import 'package:kosmos/src/list_feature/country_item_view.dart';
 import 'package:kosmos/src/services/country_service.dart';
 
@@ -54,18 +55,20 @@ class _CountryListViewState extends State<CountryListView> {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      shrinkWrap: true,
-      physics: NeverScrollableScrollPhysics(),
-      restorationId: 'sampleItemListView',
-      itemCount: items.length,
-      itemBuilder: (BuildContext context, int index) {
-        final item = items[index];
+    return _isLoading
+        ? SizedBox(height: 400, child: Loader())
+        : ListView.builder(
+            shrinkWrap: true,
+            physics: NeverScrollableScrollPhysics(),
+            restorationId: 'sampleItemListView',
+            itemCount: items.length,
+            itemBuilder: (BuildContext context, int index) {
+              final item = items[index];
 
-        return CountryItemView(
-          item: item,
-        );
-      },
-    );
+              return CountryItemView(
+                item: item,
+              );
+            },
+          );
   }
 }

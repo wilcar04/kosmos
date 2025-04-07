@@ -17,19 +17,22 @@ class CountryItemView extends StatelessWidget {
           ListTile(
             minVerticalPadding: 20,
             leading: SizedBox(
-              height: double.infinity, // Ocupar toda la altura disponible
-              width: null, // Ancho automático
-              child: ClipRRect(
-                borderRadius:
-                    BorderRadius.circular(12), // Adjust the radius as needed
-                child: Image.network(
-                  item.imageUrl,
-                  fit: BoxFit.cover,
+              width: 100,
+              height: 60,
+              child: Center(
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(12),
+                  child: FittedBox(
+                    fit: BoxFit.contain,
+                    child: Image.network(item.imageUrl),
+                  ),
                 ),
               ),
             ),
             title: Text(
               item.name,
+              overflow: TextOverflow.ellipsis,
+              maxLines: 2,
               style: Theme.of(context).textTheme.headlineSmall,
             ),
             subtitle: Row(
@@ -46,7 +49,7 @@ class CountryItemView extends StatelessWidget {
                   child: Text(
                     item.capital,
                     overflow: TextOverflow.ellipsis,
-                    maxLines: 2,
+                    maxLines: 1,
                   ),
                 ),
               ],
