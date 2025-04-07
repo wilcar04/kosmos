@@ -15,6 +15,7 @@ class CountryService {
         field = ',subregion';
       }
       route = 'region/$continent';
+      field = '$field,independent';
     } else {
       route = 'independent';
     }

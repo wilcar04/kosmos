@@ -50,6 +50,8 @@ class _CountryListViewState extends State<CountryListView> {
                   (!(country.subRegion == 'South America') && !isSouthAmerica))
               .toList();
         }
+
+        list = list.where((country) => country.isIndependent!).toList();
       }
 
       setState(() {

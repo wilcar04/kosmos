@@ -46,7 +46,7 @@ class ContinentsView extends StatelessWidget {
                     ContinentCard(continent: 'Africa'),
                     ContinentCard(continent: 'North-America'),
                     ContinentCard(continent: 'South-America'),
-                    ContinentCard(continent: 'Australia'),
+                    ContinentCard(continent: 'Oceania'),
                   ],
                 ),
               )

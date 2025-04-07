@@ -1,6 +1,7 @@
 class CountryItem {
   const CountryItem(
       {required this.code,
+      this.isIndependent,
       this.subRegion,
       required this.name,
       required this.capital,
@@ -13,6 +14,7 @@ class CountryItem {
   final String imageUrl;
   final String imageAlt;
   final String? subRegion;
+  final bool? isIndependent;
 
   factory CountryItem.fromJson(Map<String, dynamic> json) {
     return CountryItem(
@@ -24,6 +26,7 @@ class CountryItem {
       imageUrl: json['flags']['png'] ?? '',
       imageAlt: json['flags']['alt'] ?? '',
       subRegion: json['subregion'],
+      isIndependent: json['independent'] ?? true,
     );
   }
 }

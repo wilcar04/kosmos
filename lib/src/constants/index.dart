@@ -3,7 +3,7 @@ const Map<String, dynamic> continents = {
     'name': 'Africa',
     'asset': 'africa.png',
   },
-  'Australia': {
+  'Oceania': {
     'name': 'Australia',
     'asset': 'australia.png',
   },
