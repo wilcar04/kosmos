@@ -65,7 +65,7 @@ class CountryItemView extends StatelessWidget {
                       color: Colors.white,
                     ))),
             onTap: () {
-              context.go('/countryDetail/${item.name}');
+              context.push('/countryDetail/${item.name}');
             },
           ),
         ],

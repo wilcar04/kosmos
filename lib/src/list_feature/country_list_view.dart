@@ -9,9 +9,11 @@ import 'country_item.dart';
 class CountryListView extends StatefulWidget {
   const CountryListView({
     super.key,
+    this.continent,
   });
 
   static const routeName = '/';
+  final String? continent;
 
   @override
   State<CountryListView> createState() => _CountryListViewState();
@@ -34,7 +36,22 @@ class _CountryListViewState extends State<CountryListView> {
       _isLoading = true;
     });
     try {
-      final list = await countryService.fetchCountryList();
+      List<CountryItem> list =
+          await countryService.fetchCountryList(widget.continent);
+
+      if (widget.continent != null) {
+        if (widget.continent!.contains('America')) {
+          bool isSouthAmerica = widget.continent!.contains('South');
+
+          // Logical gate XNOR to whether South America is the subregion or not
+          list = list
+              .where((country) =>
+                  (country.subRegion == 'South America' && isSouthAmerica) ||
+                  (!(country.subRegion == 'South America') && !isSouthAmerica))
+              .toList();
+        }
+      }
+
       setState(() {
         items = list;
         _isLoading = false;

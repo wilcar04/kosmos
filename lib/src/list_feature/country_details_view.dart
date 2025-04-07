@@ -92,7 +92,7 @@ class _CountryDetailsViewState extends State<CountryDetailsView> {
             ),
             child: IconButton(
               icon: Icon(Icons.arrow_back, color: Colors.black),
-              onPressed: () => context.go('/'),
+              onPressed: () => context.pop(),
             ),
           ),
         ),

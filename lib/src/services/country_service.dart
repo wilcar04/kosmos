@@ -5,9 +5,22 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class CountryService {
-  Future<List<CountryItem>> fetchCountryList() async {
-    final url = Uri.https('www.restcountries.com', '/v3.1/independent',
-        {'status': 'true', 'fields': 'name,capital,flags,cca3'});
+  Future<List<CountryItem>> fetchCountryList(String? continent) async {
+    late String route;
+    String field = '';
+
+    if (continent != null) {
+      if (continent.contains('America')) {
+        continent = 'America';
+        field = ',subregion';
+      }
+      route = 'region/$continent';
+    } else {
+      route = 'independent';
+    }
+
+    final url = Uri.https('www.restcountries.com', '/v3.1/$route',
+        {'fields': 'name,capital,flags,cca3$field'});
 
     final response = await http.get(url);
 

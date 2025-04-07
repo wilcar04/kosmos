@@ -1,21 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:kosmos/src/constants/index.dart';
 
 class ContinentCard extends StatelessWidget {
-  final String imageAsset;
-  final String name;
-  final String route;
+  final String continent;
 
-  const ContinentCard(
-      {super.key,
-      required this.imageAsset,
-      required this.name,
-      required this.route});
+  const ContinentCard({super.key, required this.continent});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => {context.go('continents/$route')},
+      onTap: () => {context.go('/continents/$continent')},
       child: Container(
         padding: EdgeInsets.all(8),
         decoration: BoxDecoration(
@@ -37,7 +32,7 @@ class ContinentCard extends StatelessWidget {
                 ).createShader(bounds),
                 blendMode: BlendMode.srcIn,
                 child: Image.asset(
-                  'assets/images/$imageAsset',
+                  'assets/images/${continents[continent]['asset']}',
                   fit: BoxFit.contain,
                 ),
               ),
@@ -46,7 +41,7 @@ class ContinentCard extends StatelessWidget {
               height: 10,
             ),
             Text(
-              name,
+              continents[continent]['name'],
               style: Theme.of(context).textTheme.headlineSmall,
             )
           ],

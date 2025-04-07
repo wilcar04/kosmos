@@ -1,6 +1,7 @@
 class CountryItem {
   const CountryItem(
       {required this.code,
+      this.subRegion,
       required this.name,
       required this.capital,
       required this.imageUrl,
@@ -11,16 +12,18 @@ class CountryItem {
   final String capital;
   final String imageUrl;
   final String imageAlt;
+  final String? subRegion;
 
   factory CountryItem.fromJson(Map<String, dynamic> json) {
     return CountryItem(
-      code: json['cca3'],
-      name: json['name']['common'],
+      code: json['cca3'] ?? '',
+      name: json['name']['common'] ?? '',
       capital: (json['capital'] != null && json['capital'].isNotEmpty)
           ? json['capital'][0]
           : 'No capital',
-      imageUrl: json['flags']['png'],
-      imageAlt: json['flags']['alt'],
+      imageUrl: json['flags']['png'] ?? '',
+      imageAlt: json['flags']['alt'] ?? '',
+      subRegion: json['subregion'],
     );
   }
 }
