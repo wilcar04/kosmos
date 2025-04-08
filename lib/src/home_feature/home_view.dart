@@ -85,7 +85,7 @@ class HomeView extends StatelessWidget {
             height: 30,
           ),
           Text(
-            'Countries to discover',
+            'Countries to explore',
             style: Theme.of(context).textTheme.headlineSmall,
           ),
           CountryListView(),

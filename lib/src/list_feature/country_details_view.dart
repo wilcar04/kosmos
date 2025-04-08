@@ -220,7 +220,7 @@ class _CountryDetailsViewState extends State<CountryDetailsView> {
                                       dominantColor: dominantColor,
                                       icon: Icons.square_foot,
                                       title: 'Area',
-                                      data: country!.area.toString(),
+                                      data: '${country!.area.toString()} km2',
                                     ),
                                   ],
                                 ),
