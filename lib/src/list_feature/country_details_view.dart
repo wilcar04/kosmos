@@ -22,7 +22,7 @@ class _CountryDetailsViewState extends State<CountryDetailsView> {
 
   CountryDetail? country;
   String countryPhoto =
-      'https://media.architecturaldigest.com/photos/66a951edce728792a48166e6/3:2/w_7950,h_5300,c_limit/GettyImages-955441104.jpg';
+      'https://beautyrepublicfdl.com/wp-content/uploads/2020/06/placeholder-image.jpg';
   bool _isLoading = false;
   Color dominantColor = Colors.black;
 
@@ -119,7 +119,7 @@ class _CountryDetailsViewState extends State<CountryDetailsView> {
                           clipBehavior: Clip.none,
                           children: [
                             SizedBox(
-                              height: 240,
+                              height: 300,
                               width: double.infinity,
                               child: Image.network(
                                 countryPhoto,
@@ -249,7 +249,7 @@ class _CountryDetailsViewState extends State<CountryDetailsView> {
                               ),
                               SizedBox(
                                 height: 50,
-                              )
+                              ),
                             ],
                           ),
                         ),
