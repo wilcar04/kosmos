@@ -54,7 +54,6 @@ class _CountryListViewState extends State<CountryListView> {
         list = list.where((country) => country.isIndependent!).toList();
       } else {
         list = List.from(list)..shuffle();
-        list = list.take(25).toList();
       }
 
       setState(() {
