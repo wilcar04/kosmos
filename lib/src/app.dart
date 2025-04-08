@@ -51,7 +51,9 @@ class MyApp extends StatelessWidget {
         fontFamily: 'SofiaPro',
 
         primaryColor: Color(0xFF653CF6),
-        shadowColor: Color(0xFF8831F4),
+        // shadowColor: Color(0xFF8831F4),
+        shadowColor: Color(0xFF2A08A7),
+        // shadowColor: Color(0xFFA33BF5),
 
         // Personalizar texto
         textTheme: TextTheme(
@@ -66,21 +68,6 @@ class MyApp extends StatelessWidget {
       ),
 
       routerConfig: appRouter,
-
-      // onGenerateRoute: (RouteSettings routeSettings) {
-      //   return MaterialPageRoute<void>(
-      //     settings: routeSettings,
-      //     builder: (BuildContext context) {
-      //       switch (routeSettings.name) {
-      //         case CountryDetailsView.routeName:
-      //           return const CountryDetailsView();
-      //         // case CountryListView.routeName:
-      //         default:
-      //           return const HomeView();
-      //       }
-      //     },
-      //   );
-      // },
     );
   }
 }

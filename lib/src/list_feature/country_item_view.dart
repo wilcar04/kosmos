@@ -24,7 +24,24 @@ class CountryItemView extends StatelessWidget {
                   borderRadius: BorderRadius.circular(12),
                   child: FittedBox(
                     fit: BoxFit.contain,
-                    child: Image.network(item.imageUrl),
+                    child: Image.network(
+                      item.imageUrl,
+                      errorBuilder: (context, error, stackTrace) {
+                        return const Icon(
+                          Icons.broken_image,
+                          size: 48,
+                          color: Colors.grey,
+                        );
+                      },
+                      // loadingBuilder: (context, child, loadingProgress) {
+                      //   if (loadingProgress == null) return child;
+                      //   return Container(
+                      //     width: 80,
+                      //     height: 60,
+                      //     color: Colors.grey[300],
+                      //   );
+                      // },
+                    ),
                   ),
                 ),
               ),

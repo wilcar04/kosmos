@@ -1,5 +1,6 @@
 class CountryDetail {
   const CountryDetail({
+    required this.currencyCode,
     required this.code,
     required this.name,
     required this.officialName,
@@ -23,6 +24,7 @@ class CountryDetail {
   final String imageAlt;
 
   final String currency;
+  final String currencyCode;
   final String region;
   final String subRegion;
   final String flagEmoji;
@@ -38,7 +40,8 @@ class CountryDetail {
       capital: (json['capital'] as List<dynamic>?)?.first ?? 'Unknown',
       imageUrl: json['flags']['png'] ?? '',
       imageAlt: json['flags']['alt'] ?? '',
-      currency: json['currencies']?.keys.first ?? 'Unknown',
+      currencyCode: json['currencies']?.keys.first ?? 'Unknown',
+      currency: json['currencies']?.entries.first.value['name'] ?? 'Unknown',
       region: json['region'] ?? '',
       subRegion: json['subregion'] ?? '',
       flagEmoji: json['flag'] ?? '',

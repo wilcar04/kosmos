@@ -36,48 +36,55 @@ class HomeView extends StatelessWidget {
           SizedBox(
             height: 30,
           ),
-          ClipRRect(
-            borderRadius: BorderRadius.circular(12),
-            child: GestureDetector(
-              onTap: () {
-                context.go('/continents');
-              },
-              child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                height: 120,
-                color: Theme.of(context).primaryColor,
-                child: Row(
-                  children: [
-                    Container(
-                      width: 70,
-                      height: 70,
-                      padding: EdgeInsets.all(4),
-                      decoration: BoxDecoration(
-                          shape: BoxShape.circle, color: Colors.white),
-                      child: Image.asset(
-                        'assets/images/world.png',
-                        fit: BoxFit.cover,
-                      ),
+          GestureDetector(
+            onTap: () {
+              context.go('/continents');
+            },
+            child: Container(
+              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+              height: 120,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(12),
+                  gradient: LinearGradient(
+                    colors: [
+                      Theme.of(context).primaryColor,
+                      Theme.of(context).shadowColor
+                    ],
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                  )),
+              // color: Theme.of(context).primaryColor,
+              child: Row(
+                children: [
+                  Container(
+                    width: 70,
+                    height: 70,
+                    padding: EdgeInsets.all(4),
+                    decoration: BoxDecoration(
+                        shape: BoxShape.circle, color: Colors.white),
+                    child: Image.asset(
+                      'assets/images/world.png',
+                      fit: BoxFit.cover,
                     ),
-                    SizedBox(
-                      width: 20,
-                    ),
-                    Expanded(
-                        child: Text(
-                      'Try searching countries by any continent!',
-                      style: TextStyle(
-                          color: Colors.white, fontWeight: FontWeight.w600),
-                    )),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    Icon(
-                      Icons.chevron_right,
-                      color: Colors.white,
-                      size: 32.0,
-                    )
-                  ],
-                ),
+                  ),
+                  SizedBox(
+                    width: 20,
+                  ),
+                  Expanded(
+                      child: Text(
+                    'Try searching countries by any continent!',
+                    style: TextStyle(
+                        color: Colors.white, fontWeight: FontWeight.w600),
+                  )),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Icon(
+                    Icons.chevron_right,
+                    color: Colors.white,
+                    size: 32.0,
+                  )
+                ],
               ),
             ),
           ),

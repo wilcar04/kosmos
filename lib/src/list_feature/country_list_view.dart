@@ -43,7 +43,7 @@ class _CountryListViewState extends State<CountryListView> {
         if (widget.continent!.contains('America')) {
           bool isSouthAmerica = widget.continent!.contains('South');
 
-          // Logical gate XNOR to whether South America is the subregion or not
+          // Logical gate XNOR whether South America is the subregion or not
           list = list
               .where((country) =>
                   (country.subRegion == 'South America' && isSouthAmerica) ||
