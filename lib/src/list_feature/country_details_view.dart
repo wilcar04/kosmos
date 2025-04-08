@@ -242,7 +242,14 @@ class _CountryDetailsViewState extends State<CountryDetailsView> {
                                           height: 200,
                                           child: Image.network(
                                               country!.coatOfArmsUrl,
-                                              fit: BoxFit.cover)),
+                                              errorBuilder:
+                                                  (context, error, stackTrace) {
+                                            return const Icon(
+                                              Icons.broken_image,
+                                              size: 48,
+                                              color: Colors.grey,
+                                            );
+                                          }, fit: BoxFit.cover)),
                                     ],
                                   ),
                                 ],

@@ -33,14 +33,16 @@ class CountryItemView extends StatelessWidget {
                           color: Colors.grey,
                         );
                       },
-                      // loadingBuilder: (context, child, loadingProgress) {
-                      //   if (loadingProgress == null) return child;
-                      //   return Container(
-                      //     width: 80,
-                      //     height: 60,
-                      //     color: Colors.grey[300],
-                      //   );
-                      // },
+                      loadingBuilder: (context, child, loadingProgress) {
+                        if (loadingProgress == null) return child;
+                        return Center(
+                          child: Container(
+                            width: 80,
+                            height: 60,
+                            color: Colors.grey[300],
+                          ),
+                        );
+                      },
                     ),
                   ),
                 ),
